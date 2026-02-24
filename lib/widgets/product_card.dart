@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../core/theme/app_theme.dart';
+import 'package:fetch_products/core/theme/app_theme.dart';
 
 class ProductCard extends StatefulWidget {
   final dynamic product;
+  final VoidCallback? onTap; // ← new
 
-  const ProductCard({
-    super.key,
-    required this.product,
-    required void Function() onTap,
-  });
+  const ProductCard({super.key, required this.product, this.onTap});
 
   @override
   State<ProductCard> createState() => _ProductCardState();
@@ -23,7 +20,10 @@ class _ProductCardState extends State<ProductCard> {
 
     return GestureDetector(
       onTapDown: (_) => setState(() => _isPressed = true),
-      onTapUp: (_) => setState(() => _isPressed = false),
+      onTapUp: (_) {
+        setState(() => _isPressed = false);
+        widget.onTap?.call(); // ← trigger navigation
+      },
       onTapCancel: () => setState(() => _isPressed = false),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 180),
@@ -54,7 +54,7 @@ class _ProductCardState extends State<ProductCard> {
           padding: const EdgeInsets.all(12),
           child: Row(
             children: [
-              // ── Product Image ────────────────────────────────────────────
+              // ── Product Image ──────────────────────────────────────────
               Container(
                 width: 72,
                 height: 72,
@@ -70,20 +70,23 @@ class _ProductCardState extends State<ProductCard> {
                   ],
                 ),
                 clipBehavior: Clip.antiAlias,
-                child: Image.network(
-                  product.image,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => const Icon(
-                    Icons.image_not_supported_rounded,
-                    color: kSubtext,
-                    size: 28,
+                child: Hero(
+                  tag: 'product_image_${product.id}',
+                  child: Image.network(
+                    product.image,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) => const Icon(
+                      Icons.image_not_supported_rounded,
+                      color: kSubtext,
+                      size: 28,
+                    ),
                   ),
                 ),
               ),
 
               const SizedBox(width: 14),
 
-              // ── Title & Category ─────────────────────────────────────────
+              // ── Title & Category ───────────────────────────────────────
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +133,7 @@ class _ProductCardState extends State<ProductCard> {
 
               const SizedBox(width: 10),
 
-              // ── Price Badge ──────────────────────────────────────────────
+              // ── Price Badge ────────────────────────────────────────────
               Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10,
