@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 const kBgDeep = Color.fromARGB(255, 234, 230, 221);
 const kBgCard = Color.fromARGB(255, 246, 245, 237);
-const kAccentCoffee = Color.fromARGB(255, 103, 113, 201);
+const kAccentCoffee = Color.fromARGB(255, 37, 34, 87);
 const kAccentCream = Color.fromARGB(255, 222, 111, 94);
 const kAccentGold = Color.fromARGB(255, 70, 44, 17);
-const kSubtext = Color.fromARGB(255, 54, 47, 109);
+const kSubtext = Color.fromARGB(255, 28, 20, 90);
 
 class AppTheme {
   static ThemeData get theme => ThemeData(
