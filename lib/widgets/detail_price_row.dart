@@ -19,7 +19,6 @@ class DetailPriceRow extends StatelessWidget {
   }
 }
 
-// ── Price Badge ───────────────────────────────────────────────────────────────
 class _PriceBadge extends StatelessWidget {
   final double price;
   const _PriceBadge({required this.price});
@@ -54,7 +53,6 @@ class _PriceBadge extends StatelessWidget {
   }
 }
 
-// ── Rating Badge ──────────────────────────────────────────────────────────────
 class _RatingBadge extends StatelessWidget {
   final double rate;
   final int count;
