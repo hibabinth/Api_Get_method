@@ -2,6 +2,7 @@ import 'package:fetch_products/animation/animated_product_list.dart';
 import 'package:fetch_products/animation/empty_state.dart';
 import 'package:fetch_products/animation/loading_indicator.dart';
 import 'package:fetch_products/viewModels/product_viewmodel.dart';
+import 'package:fetch_products/views/product_detail_page.dart';
 import 'package:fetch_products/widgets/home_header.dart';
 import 'package:fetch_products/widgets/product_search_bar.dart';
 import 'package:flutter/material.dart';
@@ -57,6 +58,23 @@ class _HomePageState extends State<HomePage1>
     super.dispose();
   }
 
+  // ── Navigate to detail page ────────────────────────────────────────────────
+  void _onProductTapped(dynamic product) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        transitionDuration: const Duration(milliseconds: 400),
+        pageBuilder: (_, __, ___) => ProductDetailPage(product: product),
+        transitionsBuilder: (_, animation, __, child) {
+          return FadeTransition(
+            opacity: CurvedAnimation(parent: animation, curve: Curves.easeOut),
+            child: child,
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<ProductViewmodel>(context);
@@ -92,7 +110,10 @@ class _HomePageState extends State<HomePage1>
                   ? const LoadingIndicator()
                   : viewModel.products.isEmpty
                   ? const EmptyState()
-                  : AnimatedProductList(products: viewModel.products),
+                  : AnimatedProductList(
+                      products: viewModel.products,
+                      onProductTapped: _onProductTapped, // ← pass callback
+                    ),
             ),
           ],
         ),

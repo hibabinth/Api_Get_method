@@ -1,10 +1,15 @@
-import 'package:fetch_products/widgets/product_card.dart';
 import 'package:flutter/material.dart';
+import 'package:fetch_products/widgets/product_card.dart';
 
 class AnimatedProductList extends StatefulWidget {
   final List<dynamic> products;
+  final void Function(dynamic product) onProductTapped;
 
-  const AnimatedProductList({super.key, required this.products});
+  const AnimatedProductList({
+    super.key,
+    required this.products,
+    required this.onProductTapped,
+  });
 
   @override
   State<AnimatedProductList> createState() => _AnimatedProductListState();
@@ -46,6 +51,7 @@ class _AnimatedProductListState extends State<AnimatedProductList>
             curve: Interval(start, end, curve: Curves.easeOutCubic),
           ),
         );
+
         final slideAnim =
             Tween<Offset>(
               begin: const Offset(0.15, 0),
@@ -61,7 +67,10 @@ class _AnimatedProductListState extends State<AnimatedProductList>
           opacity: fadeAnim,
           child: SlideTransition(
             position: slideAnim,
-            child: ProductCard(product: products[index]),
+            child: ProductCard(
+              product: products[index],
+              onTap: () => widget.onProductTapped(products[index]),
+            ),
           ),
         );
       },
