@@ -10,7 +10,6 @@ class DetailImageSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // ── Background + Hero Image ──────────────────────────────────────
         Container(
           height: 300,
           color: const Color(0xFF140F2A),
@@ -31,7 +30,6 @@ class DetailImageSection extends StatelessWidget {
           ),
         ),
 
-        // ── Bottom gradient fade ─────────────────────────────────────────
         Positioned(
           bottom: 0,
           left: 0,
@@ -48,7 +46,6 @@ class DetailImageSection extends StatelessWidget {
           ),
         ),
 
-        // ── Back button ──────────────────────────────────────────────────
         SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(12),
