@@ -3,7 +3,7 @@ import 'package:fetch_products/core/theme/app_theme.dart';
 
 class ProductCard extends StatefulWidget {
   final dynamic product;
-  final VoidCallback? onTap; // ← new
+  final VoidCallback? onTap;
 
   const ProductCard({super.key, required this.product, this.onTap});
 
@@ -54,7 +54,6 @@ class _ProductCardState extends State<ProductCard> {
           padding: const EdgeInsets.all(12),
           child: Row(
             children: [
-              // ── Product Image ──────────────────────────────────────────
               Container(
                 width: 72,
                 height: 72,
@@ -86,7 +85,6 @@ class _ProductCardState extends State<ProductCard> {
 
               const SizedBox(width: 14),
 
-              // ── Title & Category ───────────────────────────────────────
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,7 +131,6 @@ class _ProductCardState extends State<ProductCard> {
 
               const SizedBox(width: 10),
 
-              // ── Price Badge ────────────────────────────────────────────
               Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10,
