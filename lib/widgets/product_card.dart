@@ -4,7 +4,11 @@ import '../../core/theme/app_theme.dart';
 class ProductCard extends StatefulWidget {
   final dynamic product;
 
-  const ProductCard({super.key, required this.product});
+  const ProductCard({
+    super.key,
+    required this.product,
+    required void Function() onTap,
+  });
 
   @override
   State<ProductCard> createState() => _ProductCardState();
